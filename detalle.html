@@ -33,7 +33,7 @@
 
         /* Efecto de hover en la imagen */
         img:hover {
-            transform: scale(1.05);  /
+            transform: scale(1.05);  
         }
 
         /* Estilo para los mensajes debajo de la imagen */
@@ -64,18 +64,17 @@
 </head>
 <body>
     <script>
-        // Estado de las cartas
-        const cartasHabilitadas = {
-      'fotos/carta1.jpeg': false,
-      'fotos/carta2.jpeg': false,
-      'fotos/carta3.jpeg': false,
-      'fotos/carta4.jpeg': false
-        };
-    
-        // Obtener el parámetro 'image' de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const image = urlParams.get('image');  
+       // Estado de las cartas
+            const cartasHabilitadas = {
+   'fotos/carta1.jpeg': false,
+   'fotos/carta2.jpeg': false,
+   'fotos/carta3.jpeg': false,
+   'fotos/carta4.jpeg': false
+};
 
+// Obtener el parámetro 'image' de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const image = urlParams.get('image');  
       // Asignar los mensajes estáticos para cada carta
       const messages = {
         'fotos/carta1.jpeg': 'La primera vez que te vi, sentí el suelo desmoronarse bajo mis pies, cuando me di cuenta Era más de vos que de mí mismo. Esa noche me perdí en vos. En tus ojos, tu risa, en en tus labios. En una sola noche pintaste mi mundo de colores, colores que no sabía que existían, pero que ahora me habitan. Es ridículo, pero esa noche fue suficiente. Me enamoré de cada gesto que hacía temblar el tiempo, de cada mirada que encendía los silencios, y me perdí aún más con cada beso que dibujabas en mí. Desde entonces, no he dejado de caminar por el universo que sos.',
@@ -93,32 +92,33 @@
                 <img src="${image}" alt="Imagen de la carta">
                 <div class="message">${message}</div>
             </div>
-        `;    // Verificar si la carta está habilitada
-        if (cartasHabilitadas.hasOwnProperty(image)) {
-            if (cartasHabilitadas[image]) {
-                // Mostrar la carta y el mensaje si está habilitada
-                const message = messages[image] || 'Mensaje no encontrado';
-                document.body.innerHTML = `
-                    <div class="container">
-                        <img src="${image}" alt="Imagen de la carta">
-                        <div class="message">${message}</div>
-                    </div>
-                `;
-            } else {
-                // Mostrar mensaje de carta bloqueada
-                document.body.innerHTML = `
-                    <div class="container">
-                        <div class="blocked">bloqueada. ¡todavia no criatura!</div>
-                    </div>
-                `;
-            }
-        } else {
-            // Manejar casos donde la imagen no se encuentra
-            document.body.innerHTML = `
-                <div class="container">
-                    <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
-                </div>
-            `;
+        `;   
+         // Verificar si la carta está habilitada y si existe el parámetro 'image'
+if (cartasHabilitadas.hasOwnProperty(image)) {
+   if (cartasHabilitadas[image]) {
+      // Mostrar la carta y el mensaje si está habilitada
+      const message = messages[image] || 'Mensaje no encontrado';
+      document.body.innerHTML = `
+         <div class="container">
+             <img src="${image}" alt="Imagen de la carta">
+             <div class="message">${message}</div>
+         </div>
+      `;
+   } else {
+      // Mostrar mensaje de carta bloqueada
+      document.body.innerHTML = `
+         <div class="container">
+             <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
+         </div>
+      `;
+   }
+} else {
+   // Manejar casos donde la imagen no se encuentra
+   document.body.innerHTML = `
+      <div class="container">
+          <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
+      </div>
+   `;
         }
     </script>
 </body>
