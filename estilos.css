@@ -49,6 +49,27 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
+.heart {
+    font-size: 2.5em; /* Tamaño del corazón */
+    color: #ff0099; /* Rosa oscuro vintage */
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Georgia', serif; /* Estilo clásico */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+    animation: flicker 2s infinite; /* Animación de parpadeo sutil */
+}
+
+/* Animación romántica de "parpadeo" */
+@keyframes flicker {
+    0%, 100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
 
 /* Ajuste para textos largos */
 .card span {
