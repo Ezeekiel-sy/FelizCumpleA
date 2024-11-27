@@ -1,0 +1,7 @@
+title: "Mi Sitio Web"
+description: "Descripción de mi sitio web."
+baseurl: ""
+url: "https://nombre-de-tu-usuario.github.io/mi-repositorio"
+
+# Otros ajustes que puedas necesitar
+theme: jekyll-theme-primer
