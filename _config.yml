@@ -1,0 +1,7 @@
+# Configuración de GitHub Pages
+title: "Mi Sitio Web"
+description: "Este es mi sitio web personal"
+url: "https://ezeekiel-sy.github.io/FelizCumpleA"  # Asegúrate de que esta URL sea la correcta para tu repositorio
+baseurl: "/FelizCumpleA"  # Ajusta este valor si tu proyecto no está en la raíz del sitio de GitHub Pages
+
+
