@@ -7,8 +7,31 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    text-align: center;
+}
+
+.heart {
+    font-size: 2.5em; /* Tamaño del corazón */
+    color: #ff0099; /* Rosa oscuro vintage */
+    margin-top: 10px;
+    font-family: 'Georgia', serif; /* Estilo clásico */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+    animation: flicker 2s infinite; /* Animación de parpadeo sutil */
+}
+
+/* Animación romántica de "parpadeo" */
+@keyframes flicker {
+    0%, 100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
 }
 
 /* Estilos para el carrusel */
@@ -32,9 +55,8 @@ body {
     flex: 0 0 auto;
     width: 250px;
     height: 350px;
-    background: #fff;
+    background: #fff; /* Color de fondo sólido */
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,58 +70,35 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-}
-.heart {
-    font-size: 2.5em; /* Tamaño del corazón */
-    color: #ff0099; /* Rosa oscuro vintage */
-    text-align: center;
-    margin-top: 10px;
-    font-family: 'Georgia', serif; /* Estilo clásico */
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombras suaves */
-    animation: flicker 2s infinite; /* Animación de parpadeo sutil */
-}
-
-/* Animación romántica de "parpadeo" */
-@keyframes flicker {
-    0%, 100% {
-        opacity: 0.9;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.1);
-    }
-}
-
-/* Ajuste para textos largos */
-.card span {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Muestra el texto en una sola línea */
-    width: 90%; /* Asegura que el texto no desborde los bordes */
+    box-shadow: none; /* Elimina la sombra */
 }
 
 /* Efecto hover en las cartas */
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Colores personalizados para cada carta */
+/* Colores sólidos personalizados para cada carta */
 .card:nth-child(1) {
-    background-color: #D4AF37;
+    background-color: #D4AF37; /* Amarillo dorado */
     color: #2b2b2b;
 }
 .card:nth-child(2) {
-    background-color: #F4D03F;
+    background-color: #F4D03F; /* Amarillo claro */
     color: #2b2b2b;
 }
 .card:nth-child(3) {
-    background-color: #D5B89A;
+    background-color: #D5B89A; /* Beige cálido */
     color: #3b3b3b;
 }
 .card:nth-child(4) {
-    background-color: #924e2d;
-    color: #f9f9f9; /* Texto claro para fondo oscuro */
+    background-color: #924e2d; /* Marrón oscuro */
+    color: #f9f9f9; /* Texto claro */
+}
+
+/* Estilo para la cuenta regresiva */
+#cuenta-regresiva {
+    font-size: 1.5em;
+    color: #333;
+    margin-top: 20px;
 }

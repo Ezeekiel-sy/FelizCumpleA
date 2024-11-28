@@ -3,164 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartas</title>
+    <title>Detalle de la Carta</title>
     <style>
-        /* Estilos generales para la página */
- body {
-     font-family: 'Georgia', serif;  
-     margin: 0;
-     padding: 0;
-     background-color: #f1e6f0; 
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     height: 100vh;
-     overflow: hidden; 
- }
- 
- /* Estilo para la imagen */
- img {
-     width: 65%;  
-     max-width: 500px; /* Un poco más grande */
-     height: auto;
-     border-radius: 15px;  
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
-     display: block;
-     margin-bottom: 20px;
-     transition: transform 0.3s ease-in-out;
- }
- 
- /* Efecto de hover en la imagen */
- img:hover {
-     transform: scale(1.05);  
- }
- 
- /* Estilo para los mensajes debajo de la imagen */
- .message {
-     background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-     padding: 20px;
-     border-radius: 10px;
-     width: 85%;
-     max-width: 600px;
-     text-align: justify; /* Justificar texto para mejor alineación */
-     font-size: 1.3em;
-     color: #2b2b2b; /* Color oscuro para texto */
-     font-style: italic;
-     margin-bottom: 20px;
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-     line-height: 1.6; /* Mejorar espaciado entre líneas */
- }
- 
- /* Ajuste específico para mensajes oscuros */
- .message-dark {
-     background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
-     color: #ffffff; /* Texto claro */
- }
- 
- /* Estilo para el contenedor de la página */
- .container {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
- }
- 
-     </style>
+       /* Estilos generales para la página */
+        body {
+            font-family: 'Georgia', serif;  
+            margin: 0;
+            padding: 0;
+            background-color: #f1e6f0; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        /* Estilo para la imagen */
+        img {
+            width: 65%;  
+            max-width: 500px; /* Un poco más grande */
+            height: auto;
+            border-radius: 15px;  
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+            display: block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Efecto de hover en la imagen */
+        img:hover {
+            transform: scale(1.05);  
+        }
+
+        /* Estilo para los mensajes debajo de la imagen */
+        .message {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+            width: 85%;
+            max-width: 600px;
+            text-align: justify; /* Justificar texto para mejor alineación */
+            font-size: 1.3em;
+            color: #2b2b2b; /* Color oscuro para texto */
+            font-style: italic;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.6; /* Mejorar espaciado entre líneas */
+        }
+
+        /* Ajuste específico para mensajes oscuros */
+        .message-dark {
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+            color: #ffffff; /* Texto claro */
+        }
+
+        /* Estilo para el contenedor de la página */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .blocked {
+            font-size: 1.5em;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <script>
- HEAD
-       // Cargar estado de las cartas desde localStorage o usar valores predeterminados
-const cartasHabilitadas = JSON.parse(localStorage.getItem('cartasHabilitadas')) || {
-    'fotos/carta1.jpeg': true,
-    'fotos/carta2.jpeg': false,
-    'fotos/carta3.jpeg': false,
-    'fotos/carta4.jpeg': false
-};
-
-     
-
-// Guardar el estado actualizado en localStorage
-localStorage.setItem('cartasHabilitadas', JSON.stringify(cartasHabilitadas));
-
-// Obtener el parámetro 'image' de la URL
-const urlParams = new URLSearchParams(window.location.search);
-const image = urlParams.get('image');
+        // Estado de las cartas (habilitadas o bloqueadas)
+        const cartasHabilitadas = {
+            'fotos/carta1.jpeg': true,
+            'fotos/carta2.jpeg': false,
+            'fotos/carta3.jpeg': false,
+            'fotos/carta4.jpeg': false
+        };
+    
+        // Obtener el parámetro 'image' de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const image = urlParams.get('image');  
 
         // Asignar los mensajes estáticos para cada carta
         const messages = {
-        'fotos/carta1.jpeg': 'La primera vez que te vi, sentí el suelo desmoronarse bajo mis pies, cuando me di cuenta Era más de vos que de mí mismo. Esa noche me perdí en vos. En tus ojos, tu risa, en en tus labios. En una sola noche pintaste mi mundo de colores, colores que no sabía que existían, pero que ahora me habitan. Es ridículo, pero esa noche fue suficiente. Me enamoré de cada gesto que hacía temblar el tiempo, de cada mirada que encendía los silencios, y me perdí aún más con cada beso que dibujabas en mí. Desde entonces, no he dejado de caminar por el universo que sos.',
-        'fotos/carta2.jpeg': 'Estos meses contigo han sido inimaginables. Jamás pensé que tendría a alguien como vos: fuerte, valiente, y seguir siendo bueno, dulce, tan único. Sos esa parte que siempre busqué, lo que mi alma anhelaba sin saberlo. Cada vez que estoy contigo, el mundo podría arder en llamas y no me importaría, porque con una mirada, una caricia o un beso tuyo, todo mi infierno se apaga. En ese instante, paso del caos al cielo, contigo... de la mano..',
-        'fotos/carta3.jpeg': 'Te lo prometo. No te amaré solo por lo que ves, sino por lo que somos, por lo que crecemos juntos, por cada palabra compartida, por cada beso robado a la eternidad. Mi amor por ti no morirá, será un amor que no se mide en belleza, sino en la profundidad de lo que hemos construido,en lo que hemos sido siempre, y en lo que seguiremos siendo..',
-        'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, \nSiempre estaré aquí a tu lado, \nEl amor que siento por ti es inmenso, \nInquebrantable, nunca será olvidado.'
+            'fotos/carta1.jpeg': 'La primera vez que te vi, sentí el suelo desmoronarse bajo mis pies...',
+            'fotos/carta2.jpeg': 'Estos meses contigo han sido inimaginables...',
+            'fotos/carta3.jpeg': 'Te lo prometo. No te amaré solo por lo que ves...',
+            'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, Siempre estaré aquí a tu lado...'
         };
 
-       // Verificar si la carta existe y está habilitada
-if (cartasHabilitadas.hasOwnProperty(image)) {
-    if (cartasHabilitadas[image]) {
-        // Mostrar la carta habilitada
-        const message = messages[image] || 'Mensaje no encontrado';
-        document.body.innerHTML = `
-            <div class="container">
-                <img src="${image}" alt="Imagen de la carta">
-                <div class="message">${message}</div>
-            </div>
-        `;
-    } else {
-        // Mostrar mensaje de carta bloqueada
-        document.body.innerHTML = `
-            <div class="container">
-                <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
-            </div>
-        `;
-    }
-} else {
-    // Mostrar mensaje de error si la carta no existe
-    document.body.innerHTML = `
-        <div class="container">
-            <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
-        </div>
-    `;
-}
-     // Función para abrir la carta
-     function openCardPage(image) {
-            window.open("detalle.html?image=" + image, "_blank");
+        // Verificar si la carta está habilitada
+        if (cartasHabilitadas[image] !== undefined) {
+            if (cartasHabilitadas[image]) {
+                // Mostrar la carta y el mensaje si está habilitada
+                document.body.innerHTML = `
+                    <div class="container">
+                        <img src="${image}" alt="Imagen de la carta">
+                        <div class="message">${messages[image]}</div>
+                    </div>
+                `;
+            } else {
+                // Mostrar mensaje de carta bloqueada
+                document.body.innerHTML = `
+                    <div class="container">
+                        <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
+                    </div>
+                `;
+            }
+        } else {
+            // Mostrar mensaje de carta no encontrada
+            document.body.innerHTML = `
+                <div class="container">
+                    <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
+                </div>
+            `;
         }
-
-        // Cuenta regresiva: Muestra la fecha actual y cuenta el tiempo
-        function startCountdown() {
-            const countdownElement = document.getElementById("countdown");
-            const targetDate = new Date("2024-12-03T00:00:00"); // Fecha objetivo para habilitar la carta 2
-
-            // Función para actualizar el contador cada segundo
-            setInterval(function() {
-                const now = new Date();
-                const remainingTime = targetDate - now;
-
-                if (remainingTime <= 0) {
-                    // Si el tiempo se acaba, habilitamos la carta
-                    countdownElement.innerHTML = "¡Ahora sí, criatura! La carta está habilitada.";
-                    document.getElementById("card2").onclick = function() { openCardPage('fotos/carta2.jpeg'); };
-                } else {
-                    // Calculamos los días, horas, minutos y segundos restantes
-                    const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-                    countdownElement.innerHTML = `Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-                }
-            }, 1000);
-        }
-
-        // Llamar a la función de cuenta regresiva al cargar la página
-        startCountdown();
-    </script>
-    <script src="script.js"></script>
-    <script>
-        verificarHabilitacion(); // Llamar a la función cuando se cargue la página
     </script>
 </body>
 </html>
