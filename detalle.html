@@ -71,6 +71,7 @@
 </head>
 <body>
     <script>
+<<<<<<< HEAD
        // Cargar estado de las cartas desde localStorage o usar valores predeterminados
 const cartasHabilitadas = JSON.parse(localStorage.getItem('cartasHabilitadas')) || {
     'fotos/carta1.jpeg': true,
@@ -78,6 +79,15 @@ const cartasHabilitadas = JSON.parse(localStorage.getItem('cartasHabilitadas')) 
     'fotos/carta3.jpeg': false,
     'fotos/carta4.jpeg': false
 };
+=======
+        // Estado de las cartas (habilitadas o no)
+        const cartasHabilitadas = {
+            'fotos/carta1.jpeg': true,
+            'fotos/carta2.jpeg': false,
+            'fotos/carta3.jpeg': false,
+            'fotos/carta4.jpeg': false
+        };
+>>>>>>> 365de8126b83118620da59f2e2e0b70aab209dba
 
 // Guardar el estado actualizado en localStorage
 localStorage.setItem('cartasHabilitadas', JSON.stringify(cartasHabilitadas));
