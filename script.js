@@ -2,14 +2,7 @@ function openCardPage(image) {
     // Verifica si la función está siendo llamada correctamente
     console.log("Abrir carta con imagen:", image);
 
-    // Cargar estado de las cartas habilitadas desde localStorage
-    const cartasHabilitadas = JSON.parse(localStorage.getItem('cartasHabilitadas')) || {
-        'fotos/carta1.jpeg': true,
-        'fotos/carta2.jpeg': false,
-        'fotos/carta3.jpeg': false,
-        'fotos/carta4.jpeg': false
-    };
-
+  
     // Verificar si la carta está habilitada
     if (cartasHabilitadas[image]) {
         // Si la carta está habilitada, abrir la página de detalles
