@@ -22,7 +22,7 @@ const messages = {
 // Estado de las cartas, modificado en detalle.html
 const cartasHabilitadas = {
     'fotos/carta1.jpeg': true,  // Carta 1 ya habilitada
-    'fotos/carta2.jpeg': false,
+    'fotos/carta2.jpeg': true,
     'fotos/carta3.jpeg': false,
     'fotos/carta4.jpeg': false
 };
@@ -73,3 +73,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // Aquí es donde habilitarías las cartas manualmente
 // Ejemplo: Cuando habilites una carta, asegúrate de actualizar el estado de 'cartasHabilitadas'
 // cartasHabilitadas['fotos/carta2.jpeg'] = true;  // Esto habilitará la carta 2
+['fotos/carta2.jpeg'] = true;
