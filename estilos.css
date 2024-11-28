@@ -9,17 +9,41 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
     text-align: center;
+    overflow-x: hidden; /* Evita scroll horizontal */
 }
 
-.heart {
-    font-size: 2.5em; /* Tamaño del corazón */
-    color: #ff0099; /* Rosa oscuro vintage */
-    margin-top: 10px;
-    font-family: 'Georgia', serif; /* Estilo clásico */
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombras suaves */
-    animation: flicker 2s infinite; /* Animación de parpadeo sutil */
+/* Ajustes específicos para dispositivos iOS */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+        height: auto; /* Ajustar altura para pantallas pequeñas */
+        overflow-y: auto; /* Permite scroll vertical si es necesario */
+    }
+
+    .heart {
+        font-size: 2em; /* Reduce tamaño del corazón */
+    }
+
+    #cuenta-regresiva {
+        font-size: 1.2em; /* Ajusta tamaño de fuente */
+    }
+
+    .carousel {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .card {
+        width: 90%; /* Cartas ocupan la mayor parte del ancho */
+        height: auto; /* Ajustar altura automáticamente */
+        font-size: 1em; /* Reduce tamaño de fuente */
+        padding: 10px; /* Reduce padding interno */
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Reduce el efecto hover */
+    }
 }
 
 /* Animación romántica de "parpadeo" */
@@ -61,7 +85,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center; /* Asegura que el texto esté centrado horizontalmente */
+    text-align: center;
     font-size: 1.3em;
     font-weight: bold;
     padding: 15px;
@@ -108,4 +132,11 @@ body {
     font-size: 1.2em;
     color: #ff0000; /* Color de texto para la notificación */
     margin-top: 20px;
+}
+
+/* Estilos para cartas deshabilitadas */
+.card.deshabilitada {
+    opacity: 0.5;
+    pointer-events: none; /* Desactiva clics */
+    box-shadow: none; /* Sin sombra */
 }
