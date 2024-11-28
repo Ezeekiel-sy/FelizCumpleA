@@ -102,3 +102,10 @@ body {
     color: #333;
     margin-top: 20px;
 }
+
+/* Estilos para las notificaciones */
+#mensaje-notificacion {
+    font-size: 1.2em;
+    color: #ff0000; /* Color de texto para la notificación */
+    margin-top: 20px;
+}
