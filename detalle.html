@@ -71,17 +71,20 @@
 </head>
 <body>
     <script>
-        // Estado de las cartas (habilitadas o no)
-        const cartasHabilitadas = {
-            'fotos/carta1.jpeg': false,
-            'fotos/carta2.jpeg': false,
-            'fotos/carta3.jpeg': false,
-            'fotos/carta4.jpeg': false
-        };
+       // Cargar estado de las cartas desde localStorage o usar valores predeterminados
+const cartasHabilitadas = JSON.parse(localStorage.getItem('cartasHabilitadas')) || {
+    'fotos/carta1.jpeg': true,
+    'fotos/carta2.jpeg': false,
+    'fotos/carta3.jpeg': false,
+    'fotos/carta4.jpeg': false
+};
 
-        // Obtener el parámetro 'image' de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const image = urlParams.get('image');  
+// Guardar el estado actualizado en localStorage
+localStorage.setItem('cartasHabilitadas', JSON.stringify(cartasHabilitadas));
+
+// Obtener el parámetro 'image' de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const image = urlParams.get('image');
 
         // Asignar los mensajes estáticos para cada carta
         const messages = {
@@ -91,34 +94,70 @@
         'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, \nSiempre estaré aquí a tu lado, \nEl amor que siento por ti es inmenso, \nInquebrantable, nunca será olvidado.'
         };
 
-        // Verificar si la carta existe y está habilitada
-        if (cartasHabilitadas.hasOwnProperty(image)) {
-            // Verificar si la carta está habilitada
-            if (cartasHabilitadas[image]) {
-                // Si está habilitada, mostrar la imagen y el mensaje
-                const message = messages[image] || 'Mensaje no encontrado';
-                document.body.innerHTML = `
-                    <div class="container">
-                        <img src="${image}" alt="Imagen de la carta">
-                        <div class="message">${message}</div>
-                    </div>
-                `;
-            } else {
-                // Si no está habilitada, mostrar un mensaje indicando que está bloqueada
-                document.body.innerHTML = `
-                    <div class="container">
-                        <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
-                    </div>
-                `;
-            }
-        } else {
-            // Si la carta no existe, mostrar un mensaje de error
-            document.body.innerHTML = `
-                <div class="container">
-                    <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
-                </div>
-            `;
+       // Verificar si la carta existe y está habilitada
+if (cartasHabilitadas.hasOwnProperty(image)) {
+    if (cartasHabilitadas[image]) {
+        // Mostrar la carta habilitada
+        const message = messages[image] || 'Mensaje no encontrado';
+        document.body.innerHTML = `
+            <div class="container">
+                <img src="${image}" alt="Imagen de la carta">
+                <div class="message">${message}</div>
+            </div>
+        `;
+    } else {
+        // Mostrar mensaje de carta bloqueada
+        document.body.innerHTML = `
+            <div class="container">
+                <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
+            </div>
+        `;
+    }
+} else {
+    // Mostrar mensaje de error si la carta no existe
+    document.body.innerHTML = `
+        <div class="container">
+            <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>
+        </div>
+    `;
+}
+     // Función para abrir la carta
+     function openCardPage(image) {
+            window.open("detalle.html?image=" + image, "_blank");
         }
+
+        // Cuenta regresiva: Muestra la fecha actual y cuenta el tiempo
+        function startCountdown() {
+            const countdownElement = document.getElementById("countdown");
+            const targetDate = new Date("2024-12-03T00:00:00"); // Fecha objetivo para habilitar la carta 2
+
+            // Función para actualizar el contador cada segundo
+            setInterval(function() {
+                const now = new Date();
+                const remainingTime = targetDate - now;
+
+                if (remainingTime <= 0) {
+                    // Si el tiempo se acaba, habilitamos la carta
+                    countdownElement.innerHTML = "¡Ahora sí, criatura! La carta está habilitada.";
+                    document.getElementById("card2").onclick = function() { openCardPage('fotos/carta2.jpeg'); };
+                } else {
+                    // Calculamos los días, horas, minutos y segundos restantes
+                    const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                    countdownElement.innerHTML = `Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+        }
+
+        // Llamar a la función de cuenta regresiva al cargar la página
+        startCountdown();
+    </script>
+    <script src="script.js"></script>
+    <script>
+        verificarHabilitacion(); // Llamar a la función cuando se cargue la página
     </script>
 </body>
 </html>
