@@ -9,12 +9,12 @@ function mostrarCuentaRegresiva() {
     if (isIos()) {
         const fechaObjetivo = new Date('2024-11-28T11:13:00');
         const interval = setInterval(function () {
-            const ahora = new Date();
+            const ahora = new Date('2024-11-28T11:13:00');
             const distancia = fechaObjetivo - ahora;
 
             if (distancia <= 0) {
                 clearInterval(interval);
-                cuentaRegresiva.innerHTML = "¡La fecha ha llegado!";
+                cuentaRegresiva.innerHTML = "¡Ahora si criatura!";
             } else {
                 const horas = Math.floor(distancia / (1000 * 60 * 60));
                 const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
