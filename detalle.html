@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de la Carta</title>
     <style>
-       /* Estilos generales para la página */
+        /* Estilos generales para la página */
         body {
-            font-family: 'Georgia', serif;  
+            font-family: 'Georgia', serif;  /* Fuente vintage, estilo Lana del Rey */
             margin: 0;
             padding: 0;
-            background-color: #f1e6f0; 
+            background-color: #f1e6f0;  /* Color de fondo suave */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden; 
+            overflow: hidden; /* Evitar desplazamiento innecesario */
         }
 
         /* Estilo para la imagen */
         img {
-            width: 65%;  
-            max-width: 500px; /* Un poco más grande */
+            width: 60%;  /* Reducir el tamaño de la imagen */
+            max-width: 400px;  /* Tamaño máximo */
             height: auto;
-            border-radius: 15px;  
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+            border-radius: 15px;  /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Sombra suave */
             display: block;
             margin-bottom: 20px;
             transition: transform 0.3s ease-in-out;
@@ -33,29 +33,22 @@
 
         /* Efecto de hover en la imagen */
         img:hover {
-            transform: scale(1.05);  
+            transform: scale(1.05);  /* Hacer que la imagen se agrande un poco al pasar el mouse */
         }
 
         /* Estilo para los mensajes debajo de la imagen */
         .message {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-            padding: 20px;
+            background-color: #fce4d6;  /* Fondo suave para el mensaje */
+            padding: 15px;
             border-radius: 10px;
-            width: 85%;
-            max-width: 600px;
-            text-align: justify; /* Justificar texto para mejor alineación */
-            font-size: 1.3em;
-            color: #2b2b2b; /* Color oscuro para texto */
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #3b3b3b;
             font-style: italic;
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            line-height: 1.6; /* Mejorar espaciado entre líneas */
-        }
-
-        /* Ajuste específico para mensajes oscuros */
-        .message-dark {
-            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
-            color: #ffffff; /* Texto claro */
         }
 
         /* Estilo para el contenedor de la página */
@@ -67,54 +60,60 @@
             text-align: center;
         }
 
-        .blocked {
-            font-size: 1.5em;
-            color: red;
-        }
     </style>
 </head>
 <body>
     <script>
-        // Estado de las cartas (habilitadas o bloqueadas)
+        // Estado de las cartas
         const cartasHabilitadas = {
-            'fotos/carta1.jpeg': true,
-            'fotos/carta2.jpeg': false,
-            'fotos/carta3.jpeg': false,
-            'fotos/carta4.jpeg': false
+      'fotos/carta1.jpeg': true,
+      'fotos/carta2.jpeg': false,
+      'fotos/carta3.jpeg': false,
+      'fotos/carta4.jpeg': false
         };
     
         // Obtener el parámetro 'image' de la URL
         const urlParams = new URLSearchParams(window.location.search);
-        const image = urlParams.get('image');  
+        const image = urlParams.get('image');  // Obtiene el valor del parámetro 'image' de la URL
 
-        // Asignar los mensajes estáticos para cada carta
-        const messages = {
-            'fotos/carta1.jpeg': 'La primera vez que te vi, sentí el suelo desmoronarse bajo mis pies...',
-            'fotos/carta2.jpeg': 'Estos meses contigo han sido inimaginables...',
-            'fotos/carta3.jpeg': 'Te lo prometo. No te amaré solo por lo que ves...',
-            'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, Siempre estaré aquí a tu lado...'
+      // Asignar los mensajes estáticos para cada carta
+      const messages = {
+        'fotos/carta1.jpeg': 'La primera vez que te vi, sentí el suelo desmoronarse bajo mis pies, cuando me di cuenta Era más de vos que de mí mismo. Esa noche me perdí en vos. En tus ojos, tu risa, en en tus labios. En una sola noche pintaste mi mundo de colores, colores que no sabía que existían, pero que ahora me habitan. Es ridículo, pero esa noche fue suficiente. Me enamoré de cada gesto que hacía temblar el tiempo, de cada mirada que encendía los silencios, y me perdí aún más con cada beso que dibujabas en mí. Desde entonces, no he dejado de caminar por el universo que sos.',
+        'fotos/carta2.jpeg': 'Estos meses contigo han sido inimaginables. Jamás pensé que tendría a alguien como vos: fuerte, valiente, y seguir siendo bueno, dulce, tan único. Sos esa parte que siempre busqué, lo que mi alma anhelaba sin saberlo. Cada vez que estoy contigo, el mundo podría arder en llamas y no me importaría, porque con una mirada, una caricia o un beso tuyo, todo mi infierno se apaga. En ese instante, paso del caos al cielo, contigo... de la mano..',
+        'fotos/carta3.jpeg': 'Te lo prometo. No te amaré solo por lo que ves, sino por lo que somos, por lo que crecemos juntos, por cada palabra compartida, por cada beso robado a la eternidad. Mi amor por ti no morirá, será un amor que no se mide en belleza, sino en la profundidad de lo que hemos construido,en lo que hemos sido siempre, y en lo que seguiremos siendo..',
+        'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, \nSiempre estaré aquí a tu lado, \nEl amor que siento por ti es inmenso, \nInquebrantable, nunca será olvidado.'
         };
 
-        // Verificar si la carta está habilitada
-        if (cartasHabilitadas[image] !== undefined) {
+        // Obtener el mensaje correspondiente a la imagen seleccionada
+        const message = messages[image] || 'Mensaje no encontrado';
+
+        // Mostrar la imagen y el mensaje
+        document.body.innerHTML = `
+            <div class="container">
+                <img src="${image}" alt="Imagen de la carta">
+                <div class="message">${message}</div>
+            </div>
+        `;    // Verificar si la carta está habilitada
+        if (cartasHabilitadas.hasOwnProperty(image)) {
             if (cartasHabilitadas[image]) {
                 // Mostrar la carta y el mensaje si está habilitada
+                const message = messages[image] || 'Mensaje no encontrado';
                 document.body.innerHTML = `
                     <div class="container">
                         <img src="${image}" alt="Imagen de la carta">
-                        <div class="message">${messages[image]}</div>
+                        <div class="message">${message}</div>
                     </div>
                 `;
             } else {
                 // Mostrar mensaje de carta bloqueada
                 document.body.innerHTML = `
                     <div class="container">
-                        <div class="blocked">Esta carta está bloqueada. ¡Todavía no criatura!</div>
+                        <div class="blocked">bloqueada. ¡todavia no criatura!</div>
                     </div>
                 `;
             }
         } else {
-            // Mostrar mensaje de carta no encontrada
+            // Manejar casos donde la imagen no se encuentra
             document.body.innerHTML = `
                 <div class="container">
                     <div class="blocked">La carta no existe. Por favor verifica el enlace.</div>

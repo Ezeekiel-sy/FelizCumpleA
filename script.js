@@ -1,45 +1,47 @@
-// Función para detectar si el dispositivo es iOS
-function isIos() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-// Función para mostrar la cuenta regresiva solo en iOS
-function mostrarCuentaRegresiva() {
-    const cuentaRegresiva = document.getElementById('cuenta-regresiva');
-    if (isIos()) {
-        const fechaObjetivo = new Date('2024-11-28T11:13:00');
-        const interval = setInterval(function () {
-            const ahora = new Date('2024-11-28T11:13:00');
-            const distancia = fechaObjetivo - ahora;
-
-            if (distancia <= 0) {
-                clearInterval(interval);
-                cuentaRegresiva.innerHTML = "¡Ahora si criatura!";
-            } else {
-                const horas = Math.floor(distancia / (1000 * 60 * 60));
-                const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-                const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-                cuentaRegresiva.innerHTML = `Tiempo restante: ${horas}h ${minutos}m ${segundos}s`;
-            }
-        }, 1000);
-    } else {
-        cuentaRegresiva.innerHTML = "La cuenta regresiva solo está disponible en dispositivos iOS.";
-    }
-}
-
-// Función para manejar el clic en una carta y mostrar el mensaje correspondiente
+// Función para abrir la página de detalle de la carta
 function openCardPage(image) {
-    const mensajeNotificacion = document.getElementById('mensaje-notificacion');
-    const carta = document.querySelector(`[data-id="${image}"]`);
+    console.log("Abrir carta con imagen:", image);
+    window.open("detalle.html?image=" + image, "_blank");
+}
 
-    // Si la carta es desbloqueada
-    if (carta) {
-        mensajeNotificacion.innerHTML = `¡La carta ha sido desbloqueada!`;
-        window.open(`detalle.html?image=${image}`, "_blank");
-    } else {
-        mensajeNotificacion.innerHTML = `Esta carta está bloqueada.`;
+// Mensajes de las cartas
+const messages = {
+    'fotos/carta1.jpeg': 'El día que nos conocimos, \nUn suspiro en el aire, \nMiradas que se cruzaron, \nY un amor que comenzó a nacer.',
+    'fotos/carta2.jpeg': 'En cada paso que damos, \nNos acercamos más al sol, \nY aunque la vida nos pone pruebas, \nSiempre encontraremos el amor.',
+    'fotos/carta3.jpeg': 'Tiempos de risas y de lágrimas, \nUn viaje lleno de emoción, \nCada momento juntos es eterno, \nUn latido del corazón.',
+    'fotos/carta4.jpeg': 'Aunque el tiempo pase lento, \nSiempre estaré aquí a tu lado, \nEl amor que siento por ti es inmenso, \nInquebrantable, nunca será olvidado.'
+};
+
+// Función para habilitar una carta y mostrar la notificación
+function habilitarCarta(cartaId) {
+    // Lógica para habilitar manualmente una carta
+    const cartaElement = document.getElementById(cartaId);
+    if (cartaElement) {
+        cartaElement.classList.remove('deshabilitada'); // Quitar clase 'deshabilitada'
+        mostrarNotificacion(`¡La carta ${cartaId} ha sido habilitada!`);
     }
 }
 
-// Llamar a la función de cuenta regresiva cuando se carga la página
-document.addEventListener('DOMContentLoaded', mostrarCuentaRegresiva);
+// Función para mostrar una notificación
+function mostrarNotificacion(mensaje) {
+    if (Notification.permission === 'granted') {
+        new Notification(mensaje);
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                new Notification(mensaje);
+            }
+        });
+    }
+}
+
+// Solicitar permisos de notificación al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
+});
+
+// Ejemplo: Habilitar una carta manualmente
+// Llama a esta función desde la consola o tu lógica manual para habilitar cartas
+// habilitarCarta('carta2'); // Cambia 'carta2' por el ID de la carta que quieras habilitar
