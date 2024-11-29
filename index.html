@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumple amor</title>
+    <title>Feliz Cumple Amor</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <div class="carousel">
-        <div class="card" id="carta1" onclick="openCardPage('fotos/carta1.jpeg')" data-id="1">29 de junio</div>
-        <div class="card" id="carta2" onclick="openCardPage('fotos/carta2.jpeg')" data-id="2">Heaven is with you</div>
-        <div class="card" id="carta3" onclick="openCardPage('fotos/carta3.jpeg')" data-id="3">Will you still love me when...?</div>
-        <div class="card" id="carta4" onclick="openCardPage('fotos/carta4.jpeg')" data-id="4">
-            I will love you beyond time <span class="heart">❤️</span> <!-- Corazón en burdeos -->
+        <div class="card" onclick="openCardPage('fotos/carta1.jpeg')" data-id="1">29 de junio</div>
+        <div class="card" onclick="openCardPage('fotos/carta2.jpeg')" data-id="2">Heaven is with you</div>
+        <div class="card" onclick="openCardPage('fotos/carta3.jpeg')" data-id="3">Will you still love me when...?</div>
+        <div class="card" onclick="openCardPage('fotos/carta4.jpeg')" data-id="4">
+            I will love you beyond time <span class="heart">❤️</span>
         </div>
-        <div class="card" id="carta1" onclick="openCardPage('fotos/carta5.jpeg')" data-id="1"> soon 👁️ </div>
-        
-
-    <div id="mensaje-notificacion"></div> <!-- Notificación de carta desbloqueada -->
-    <script src="script.js"></script>
+        <div class="card hidden" id="card5" onclick="openCardPage('fotos/carta5.jpg')" data-id="5">
+            Soon 👁️ </div>
+    </div>
+    
+    <div id="mensaje-notificacion"></div>
+    <script src="script.js"></script>  
 </body>
 </html>
 
