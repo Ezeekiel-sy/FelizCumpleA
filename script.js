@@ -1,3 +1,4 @@
+
 function openCardPage(image) {
     // Verifica si la función está siendo llamada correctamente
     console.log("Abrir carta con imagen:", image);
