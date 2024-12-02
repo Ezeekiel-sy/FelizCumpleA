@@ -19,6 +19,6 @@ messaging.onBackgroundMessage(payload => {
     console.log('Mensaje en segundo plano:', payload);
     self.registration.showNotification(payload.notification.title, {
         body: payload.notification.body,
-        icon: payload.notification.icon,
+        icon: 'fotos/cora.png',
     });
 });
