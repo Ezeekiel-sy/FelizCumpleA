@@ -6,6 +6,61 @@
     <title>Feliz Cumple Amor</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAAyb70maz_p0io4ReeRrP-PGIm42YMHhk",
+        authDomain: "feliz-cumple-amor-e05e2.firebaseapp.com",
+        projectId: "feliz-cumple-amor-e05e2",
+        storageBucket: "feliz-cumple-amor-e05e2.firebasestorage.app",
+        messagingSenderId: "533401638338",
+        appId: "1:533401638338:web:547e3446d18963ac5c325b",
+        measurementId: "G-YGMWW589WC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+</script>
+<script type="module">
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-messaging.js";
+
+    const messaging = getMessaging();
+
+    Notification.requestPermission()
+        .then(permission => {
+            if (permission === 'granted') {
+                console.log('Permiso para notificaciones concedido.');
+                return getToken(messaging, { vapidKey: "251P8qWdnEaw7OL07Jh4s8oO9Ljdf3EulGqHlc0rTlg" }); 
+            } else {
+                console.log('Permiso para notificaciones denegado.');
+            }
+        })
+        .then(token => {
+            console.log("Token de notificaciones:", token);
+        })
+        .catch(error => {
+            console.error("Error al obtener el token:", error);
+        });
+
+    onMessage(messaging, payload => {
+        console.log('Mensaje recibido:', payload);
+        alert(`Nueva notificación: ${payload.notification.title}`);
+    });
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/FelizCumpleA/firebase-messaging-sw.js')
+            .then(registration => {
+                console.log('Service Worker registrado:', registration);
+            })
+            .catch(error => {
+                console.error('Error al registrar el Service Worker:', error);
+            });
+    }
+</script>
+
 <body>
     <div class="carousel">
         <div class="card" onclick="openCardPage('fotos/carta1.jpeg')" data-id="1">29 de junio</div>
